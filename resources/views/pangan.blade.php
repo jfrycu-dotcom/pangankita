@@ -22,28 +22,34 @@
                 <div class="flex items-center gap-4" id="nav-buttons">
                     @auth
                         <div class="relative mr-2">
-                            <button onclick="toggleNotificationDropdown()" class="text-gray-500 hover:text-emerald-600 focus:outline-none relative p-2 flex items-center justify-center">
+                            <button onclick="toggleNotificationDropdown()"
+                                class="text-gray-500 hover:text-emerald-600 focus:outline-none relative p-2 flex items-center justify-center">
                                 <i class="fas fa-bell text-xl"></i>
-                                @if(isset($unreadCount) && $unreadCount > 0)
-                                    <span class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white bg-red-500 rounded-full">
+                                @if (isset($unreadCount) && $unreadCount > 0)
+                                    <span
+                                        class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white bg-red-500 rounded-full">
                                         {{ $unreadCount }}
                                     </span>
                                 @endif
                             </button>
-                            
-                            <div id="notification-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg py-2 border border-gray-100 z-50 max-h-96 overflow-y-auto">
+
+                            <div id="notification-dropdown"
+                                class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg py-2 border border-gray-100 z-50 max-h-96 overflow-y-auto">
                                 <div class="px-4 py-2 font-bold text-gray-800 border-b border-gray-100">
                                     Notifikasi Masuk
                                 </div>
-                                @if(isset($notifications) && count($notifications) > 0)
-                                    @foreach($notifications as $notif)
-                                        <div class="px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition {{ !$notif->is_read ? 'bg-emerald-50/60' : '' }}">
+                                @if (isset($notifications) && count($notifications) > 0)
+                                    @foreach ($notifications as $notif)
+                                        <div
+                                            class="px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition {{ !$notif->is_read ? 'bg-emerald-50/60' : '' }}">
                                             <p class="text-sm text-gray-700">{{ $notif->message }}</p>
-                                            <span class="text-xs text-gray-400 block mt-1">{{ $notif->created_at->diffForHumans() }}</span>
+                                            <span
+                                                class="text-xs text-gray-400 block mt-1">{{ $notif->created_at->diffForHumans() }}</span>
                                         </div>
                                     @endforeach
                                 @else
-                                    <div class="px-4 py-6 text-center text-gray-400 text-sm">Tidak ada notifikasi baru.</div>
+                                    <div class="px-4 py-6 text-center text-gray-400 text-sm">Tidak ada notifikasi baru.
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -97,7 +103,8 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <div id="page-home" class="page-section">
-            <div class="text-center py-12 px-4 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl shadow-sm mb-12">
+            <div
+                class="text-center py-12 px-4 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl shadow-sm mb-12">
                 <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
                     Hubungkan Makanan Berlebih dengan <span class="text-emerald-600">Mereka yang Membutuhkan</span>
                 </h1>
@@ -139,7 +146,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
 
         <div id="page-login"
             class="page-section hidden max-w-md mx-auto bg-white p-8 rounded-2xl shadow-md border border-gray-100 my-12">
@@ -168,7 +175,8 @@
                     class="w-full bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-emerald-700 transition shadow-md">Masuk</button>
             </form>
             <p class="text-sm text-gray-600 text-center mt-4">Belum punya akun? <button
-                    onclick="showPage('page-register')" class="text-emerald-600 font-semibold hover:underline">Daftar di
+                    onclick="showPage('page-register')" class="text-emerald-600 font-semibold hover:underline">Daftar
+                    di
                     sini</button></p>
         </div>
 
@@ -251,7 +259,8 @@
                                     required>
                             </div>
                             <div>
-                                <label class="block text-gray-700 text-sm font-semibold mb-1">Batas Waktu Pengambilan</label>
+                                <label class="block text-gray-700 text-sm font-semibold mb-1">Batas Waktu
+                                    Pengambilan</label>
                                 <input type="text" name="pickup_time" placeholder="Contoh: Sebelum jam 21:00 WITA"
                                     class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500"
                                     required>
@@ -283,12 +292,13 @@
                                 </div>
                                 <div class="p-6 pb-2">
                                     <p class="text-gray-600 text-sm mb-2"><i
-                                            class="fas fa-map-marker-alt text-gray-400 mr-2"></i>{{ $dn->pickup_address }}</p>
+                                            class="fas fa-map-marker-alt text-gray-400 mr-2"></i>{{ $dn->pickup_address }}
+                                    </p>
                                     <p class="text-gray-600 text-sm mb-4"><i
                                             class="fas fa-clock text-gray-400 mr-2"></i>{{ $dn->pickup_time }}</p>
                                 </div>
                             </div>
-                            
+
                             <div class="p-6 pt-0">
                                 @if (Auth::user()->role === 'komunitas')
                                     <div class="flex flex-col gap-2">
@@ -302,18 +312,31 @@
 
                                         @php
                                             $cleanPhone = preg_replace('/[^0-9]/', '', $dn->contact_number);
-                                            if(strpos($cleanPhone, '0') === 0) {
+                                            if (strpos($cleanPhone, '0') === 0) {
                                                 $cleanPhone = '62' . substr($cleanPhone, 1);
                                             }
-                                            $waMessage = rawurlencode("Halo " . $dn->restaurant_name . ", kami dari " . Auth::user()->name . " berniat menjemput donasi makanan sebanyak " . $dn->portions . " porsi yang dijadwalkan sebelum " . $dn->pickup_time . ". Apakah posisi penjemputan benar di: " . $dn->pickup_address . "?");
+                                            $waMessage = rawurlencode(
+                                                'Halo ' .
+                                                    $dn->restaurant_name .
+                                                    ', kami dari ' .
+                                                    Auth::user()->name .
+                                                    ' berniat menjemput donasi makanan sebanyak ' .
+                                                    $dn->portions .
+                                                    ' porsi yang dijadwalkan sebelum ' .
+                                                    $dn->pickup_time .
+                                                    '. Apakah posisi penjemputan benar di: ' .
+                                                    $dn->pickup_address .
+                                                    '?',
+                                            );
                                         @endphp
-                                        
-                                        <a href="https://api.whatsapp.com/send?phone={{ $cleanPhone }}&text={{ $waMessage }}" target="_blank" 
-                                           class="w-full bg-white text-emerald-600 border border-emerald-300 font-bold py-2 px-4 rounded-xl hover:bg-emerald-50 transition text-center flex items-center justify-center gap-2 text-sm shadow-sm">
+
+                                        <a href="https://api.whatsapp.com/send?phone={{ $cleanPhone }}&text={{ $waMessage }}"
+                                            target="_blank"
+                                            class="w-full bg-white text-emerald-600 border border-emerald-300 font-bold py-2 px-4 rounded-xl hover:bg-emerald-50 transition text-center flex items-center justify-center gap-2 text-sm shadow-sm">
                                             <i class="fab fa-whatsapp text-lg"></i> Hubungi via WhatsApp
                                         </a>
                                     </div>
-                                    @endif
+                                @endif
                             </div>
                         </div>
                     @empty
